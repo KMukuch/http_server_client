@@ -1,12 +1,6 @@
 #include <stdio.h>
-#include <netdb.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/socket.h>
-#include <sys/types.h>
-#include <netinet/in.h>
-#include <unistd.h>
-#include <poll.h>
 #include "parser.h"
 
 char** line_parser(char* buffer, int len)
