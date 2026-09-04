@@ -1,1 +1,8 @@
+# License
+
+This project is licensed under the [MIT License](LICENSE).
+
+# Descritption
+
+This is a simplified implementation of an HTTP/1.1 server with support for only two methods, `GET` and `POST`, aimed at learning about TCP/IP applications and the HTTP protocol specifically.
 
