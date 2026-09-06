@@ -3,10 +3,10 @@
 #include <string.h>
 #include "parser.h"
 
-HTTP_Start_Line* create_http_start_line(char* line)
+HTTP_Request_Line* create_http_request_line(char* line)
 {
-    HTTP_Start_Line *http_start_line = calloc(1, sizeof(HTTP_Start_Line));
-    if(!http_start_line)
+    HTTP_Request_Line *http_request_line = calloc(1, sizeof(HTTP_Request_Line));
+    if(!http_request_line)
     {
         return NULL;
     }
@@ -17,38 +17,38 @@ HTTP_Start_Line* create_http_start_line(char* line)
     char *first_space = strchr(line, ' ');
     if(!first_space)
     {
-        free(http_start_line);
+        free(http_request_line);
         return NULL;
     }
     else
     {
-        http_start_line->http_method = parse_http_method(line, first_space);
+        http_request_line->http_method = parse_http_method(line, first_space);
     }
 
     char *second_space = strchr(first_space + 1, ' ');
     if(!second_space)
     {
-        free(http_start_line);
+        free(http_request_line);
 
         return NULL;
     }
     else
     {
-        http_start_line->request_target = calloc(second_space - first_space, sizeof(char));
-        if(!http_start_line->request_target)
+        http_request_line->request_target = calloc(second_space - first_space, sizeof(char));
+        if(!http_request_line->request_target)
         {
-            free(http_start_line);
+            free(http_request_line);
 
             return NULL;
         }
 
-        strncpy(http_start_line->request_target, first_space + 1, second_space - first_space - 1);
+        strncpy(http_request_line->request_target, first_space + 1, second_space - first_space - 1);
 
-        http_start_line->request_target[second_space - first_space - 1] = '\0';
+        http_request_line->request_target[second_space - first_space - 1] = '\0';
     }
-    http_start_line->http_version = parse_http_version(second_space + 1);
+    http_request_line->http_version = parse_http_version(second_space + 1);
     
-    return http_start_line;
+    return http_request_line;
 }
 
 HTTP_METHOD parse_http_method(char* start, char* end)

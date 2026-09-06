@@ -8,3 +8,11 @@ This is a simplified implementation of an HTTP/1.1 server with support for only 
 
 # Workflow
 
+## TCP server layer
+
+Creates sockets and accepts the client.
+
+## HTTP parser layer
+
+Reads received bytes and parses them into a HTTP message.
+
