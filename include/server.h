@@ -3,12 +3,12 @@
 
 #include <stdio.h>
 
-int init_server();
+int server_init();
 
-int accept_client(int server_fd);
+int server_accept_client(int server_fd);
 
-int recv_server(int fd, char* buffer, int len);
+int server_recv(int fd, char* buffer, int len);
 
-int close_server_client(int* fd_array, int len);
+int server_close_fds(int* fd_array, int len);
 
 #endif

@@ -6,9 +6,9 @@ int main(int argc, char *argv[])
 {
     char* buffer = "GET /where?q=now HTTP/1.1\r\nHost: www.example.org\r\n";
 
-    char **lines = line_parser(buffer, strlen(buffer));
+    char **lines = parser_parse_line(buffer, strlen(buffer));
     
-    for(int i = 0; i < line_counter(buffer, strlen(buffer)); i++)
+    for(int i = 0; i < parser_line_counter(buffer, strlen(buffer)); i++)
     {
         printf("%s\n", lines[i]);
     }

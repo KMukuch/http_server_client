@@ -9,7 +9,7 @@
 #include <poll.h>
 #include "server.h"
 
-int init_server()
+int server_init()
 {
 	// server file descriptor
 	int server_fd;
@@ -57,7 +57,7 @@ int init_server()
 	return server_fd;
 }
 
-int accept_client(int server_fd)
+int server_accept_client(int server_fd)
 {
 	// client file descriptor
 	int client_fd;
@@ -75,7 +75,7 @@ int accept_client(int server_fd)
 	return client_fd;
 }
 
-int recv_server(int fd, char* buffer, int len)
+int server_recv(int fd, char* buffer, int len)
 {
 	int bytes_read = 1;
 
@@ -91,7 +91,7 @@ int recv_server(int fd, char* buffer, int len)
 	return bytes_read;
 }
 
-int close_server_client(int* fd_array, int len)
+int server_close_fds(int* fd_array, int len)
 {
     for(int i = 0; i < len; i++)
     {
