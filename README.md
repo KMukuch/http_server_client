@@ -15,3 +15,9 @@ Creates sockets and accepts the client.
 ## HTTP parser layer
 
 Reads received bytes and parses them into a HTTP message.
+
+# Current Status
+
+The HTTP request parser is implemented, and the server currently responds with `505 Not Implemented`.
+
+The project is intended as a learning exercise.
