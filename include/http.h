@@ -7,7 +7,8 @@ typedef enum HTTP_STATUS_CODE
 {
     HTTP_STATUS_CODE_OK = 200,
     HTTP_STATUS_CODE_BAD_REQUEST = 400,
-    HTTP_STATUS_CODE_INTERNAL_SERVER_ERROR = 500
+    HTTP_STATUS_CODE_INTERNAL_SERVER_ERROR = 500,
+    HTTP_STATUS_CODE_NOT_IMPLEMENTED = 501
 } HTTP_STATUS_CODE;
 
 typedef enum HTTP_METHOD
@@ -63,12 +64,26 @@ typedef struct HTTP_Response_Message
     char *message_body;
 } HTTP_Response_Message;
 
-HTTP_Request_Line* http_create_request_line(char* line);
+HTTP_Request_Message* http_create_request_message(char* buffer, char** lines, int count, int bytes_read);
 
-HTTP_Status_Line* http_create_status_line(char* line);
+HTTP_Response_Message* http_create_response_message(HTTP_Request_Message* http_request_message);
+
+int http_create_request_line(char *line, HTTP_Request_Line *http_request_line);
+
+int http_create_status_line(HTTP_Request_Line *http_request_line, HTTP_Status_Line *http_status_line);
+
+int http_create_field_line(char *line, HTTP_Field_Line *http_field_line);
 
 HTTP_METHOD http_method_from_string(char* start, char* end);
 
 HTTP_VERSION http_version_from_string(char* start);
+
+char* http_field_name_from_string(char* line);
+
+char* http_field_value_from_string(char* line);
+
+char *http_version_to_string(HTTP_VERSION http_version);
+
+int http_serialize_message(char *buffer, int len, HTTP_Response_Message *http_response_message);
 
 #endif

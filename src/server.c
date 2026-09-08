@@ -91,6 +91,18 @@ int server_recv(int fd, char* buffer, int len)
 	return bytes_read;
 }
 
+int server_send(int fd, char* buffer, int len)
+{
+	if(send(fd, buffer, len, 0) == -1)
+	{
+		perror("send");
+
+		return 0;
+	}
+
+	return 1;
+}
+
 int server_close_fds(int* fd_array, int len)
 {
     for(int i = 0; i < len; i++)

@@ -4,7 +4,7 @@ This project is licensed under the [MIT License](LICENSE).
 
 # Descritption
 
-This is a simplified implementation of an HTTP/1.1 server with support for only two methods, `GET` and `POST`, aimed at learning about TCP/IP applications and the HTTP protocol specifically.
+This is a simplified implementation of an HTTP/1.1 server aimed at learning about TCP/IP applications and the HTTP protocol specifically.
 
 # Workflow
 
@@ -15,4 +15,3 @@ Creates sockets and accepts the client.
 ## HTTP parser layer
 
 Reads received bytes and parses them into a HTTP message.
-

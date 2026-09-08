@@ -15,15 +15,15 @@ int main(int argc, char *argv[])
 
     char buffer[MAX_BUFFER];
     int bytes_read = server_recv(client_fd, buffer, MAX_BUFFER);
-    
     char **lines = parser_parse_line(buffer, bytes_read);
-    HTTP_Request_Line *http_request_line = http_create_request_line(lines[0]);
+    int count = parser_line_counter(buffer, bytes_read);
+
+    HTTP_Request_Message *http_request_message = http_create_request_message(buffer, lines, count, bytes_read);
     
-    for(int i = 0; i < parser_line_counter(buffer, bytes_read); i++)
-    {
-        printf("%s\n", lines[i]);
-    }
-    printf("%i %s %i\n", http_request_line->http_method, http_request_line->request_target, http_request_line->http_version);
+    HTTP_Response_Message *http_response_message = http_create_response_message(http_request_message);
+
+    bytes_read = http_serialize_message(buffer, MAX_BUFFER, http_response_message);
+    server_send(client_fd, buffer, bytes_read);
 
     server_close_fds(fd_array, 2);
 
